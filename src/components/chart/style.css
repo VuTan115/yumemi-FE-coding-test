@@ -40,6 +40,11 @@ input[type='checkbox' i] {
   border: initial;
   border-radius: 0;
 }
+.xaxis-label {
+  color: red;
+  padding: 10px;
+  background: red;
+}
 .axis-title {
   font-size: 14px;
   font-family: 'font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,Bitstream Vera Sans Mono, Courier New, monospace';
@@ -51,4 +56,143 @@ input[type='checkbox' i] {
 }
 .yaxis-title {
   transform: translate(2%, -44%);
+}
+.data-label {
+  font-size: 14px;
+  font-family: 'font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,Bitstream Vera Sans Mono, Courier New, monospace';
+  font-weight: 500;
+  color: black;
+}
+.label {
+  min-width: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inherit;
+  font-size: 1vw;
+  padding: 0;
+  margin: 0;
+}
+.apexcharts-canvas .apexcharts-element-hidden {
+  display: none;
+}
+.apexcharts-legend {
+  height: fit-content;
+}
+.hidden {
+  display: none;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgb(136, 136, 136);
+  background: linear-gradient(
+    141deg,
+    rgba(133, 127, 127, 0.9704879589295119) 0%,
+    rgba(210, 210, 210, 0.6980160488171524) 100%
+  );
+  opacity: 0.1;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+.dashed-loading {
+  position: absolute;
+  height: 50px;
+  top: 50%;
+  width: 50px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  z-index: 999;
+}
+.dashed-loading:after,
+.dashed-loading:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.dashed-loading:before {
+  z-index: 5;
+  border: 3px dashed yellow;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-animation: dashed 1s linear infinite;
+  animation: dashed 1s linear infinite;
+}
+.dashed-loading:after {
+  z-index: 10;
+  border: 3px solid yellow;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-animation: dashed 1s ease infinite;
+  animation: dashed 1s ease infinite;
+}
+@keyframes dashed {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media screen and (max-width: 1025px) {
+  .filter-items {
+    min-width: 5.5rem;
+  }
+  .label {
+    font-size: 1.1vw;
+  }
+}
+@media screen and (max-width: 968px) {
+  .xaxis-title {
+    transform: translate(42%, -11%);
+  }
+  .label {
+    font-size: 1.2vw;
+    padding: 0;
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .label {
+    font-size: 1.5vw;
+
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  #chart {
+    margin: 0;
+    height: 70vh;
+    margin-top: 3em;
+  }
+
+  input[type='radio' i] {
+    margin: 1px;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .filter-items {
+    min-width: 4rem;
+  }
+  .label {
+    font-size: 0.6rem;
+    padding: 0;
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .label {
+    font-size: 2.5vw;
+    padding: 0;
+    margin: 0;
+  }
 }
