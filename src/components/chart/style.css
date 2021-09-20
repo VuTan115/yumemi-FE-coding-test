@@ -1,0 +1,54 @@
+#chart {
+  margin: 3.5rem 2.25rem 2.25rem 1.25rem;
+  height: 75vh;
+}
+.chart-title {
+  font-size: 1.5rem;
+  color: rgb(255, 0, 0);
+}
+.prefectures-title {
+  padding: 0.5rem;
+}
+.filter {
+  height: 25vh;
+  overflow: auto;
+  margin: 0px auto;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.filter-items {
+  display: flex;
+  margin: 0.2vh 0.45vw;
+  padding: 0.2rem 0.3rem 0.2rem 0.1rem;
+  width: calc(100% / 15);
+  min-width: 4.5rem;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(177, 177, 177);
+  height: fit-content;
+}
+
+input[type='checkbox' i] {
+  background-color: initial;
+  cursor: default;
+  appearance: auto;
+  box-sizing: border-box;
+  margin: 3px 3px 2px 2px;
+  padding: initial;
+  border: initial;
+  border-radius: 0;
+}
+.axis-title {
+  font-size: 14px;
+  font-family: 'font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,Bitstream Vera Sans Mono, Courier New, monospace';
+  font-weight: 600;
+  color: black;
+}
+.xaxis-title {
+  transform: translate(45%, -5%);
+}
+.yaxis-title {
+  transform: translate(2%, -44%);
+}
