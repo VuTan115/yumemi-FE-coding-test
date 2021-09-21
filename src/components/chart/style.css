@@ -14,8 +14,11 @@
   overflow: auto;
   margin: 0px auto;
   width: 100%;
+  display: -moz-box;
   display: flex;
   flex-wrap: wrap;
+  border: 1px solid #bababa;
+  padding: 0.2rem;
 }
 .filter-items {
   display: flex;
@@ -142,7 +145,7 @@ input[type='checkbox' i] {
 }
 @media screen and (max-width: 1025px) {
   .filter-items {
-    min-width: 5.5rem;
+    min-width: 4.66rem;
   }
   .label {
     font-size: 1.1vw;
@@ -181,6 +184,16 @@ input[type='checkbox' i] {
 
 @media only screen and (max-width: 426px) {
   .filter-items {
+    min-width: 4.8rem;
+  }
+  .label {
+    font-size: 0.6rem;
+    padding: 0;
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 376px) {
+  .filter-items {
     min-width: 4rem;
   }
   .label {
@@ -189,7 +202,10 @@ input[type='checkbox' i] {
     margin: 0;
   }
 }
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 321px) {
+  .filter-items {
+    margin: 1vh 1.3vw 0.1vh;
+  }
   .label {
     font-size: 2.5vw;
     padding: 0;
