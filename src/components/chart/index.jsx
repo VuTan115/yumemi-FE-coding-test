@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Chart from 'react-apexcharts'
-import instance from '../../../api/axios'
+import instance from '../../api/axios'
 import endPoints from '../../enums/endpoints'
-import { getPopulationCompitions } from '../../../api/populations'
+import { getPopulationCompitions } from '../../api/populations'
 // 人口数 都道府県
 export default function MyChart() {
   const [loading, setLoading] = useState(true)
@@ -172,8 +172,10 @@ export default function MyChart() {
   }
   const getPopulation = async (prefCode) => {
     const dummyVar = await getPopulationCompitions(prefCode)
-    // console.log(dummyVar.data.result.data[0].data)
-    return dummyVar.data.result.data[0].data
+    if (dummyVar.status && dummyVar.data.result.data) {
+      return dummyVar.data.result.data[0].data
+    }
+    return []
   }
 
   const updateXaxisLable = (data) => {
@@ -215,7 +217,10 @@ export default function MyChart() {
       const data = await getPopulation(prefCode)
       const newSeries = seriesConverter(prefCode, data, prefName)
       // setLoading(false)
-      setSeries([...series, newSeries])
+
+      if (data.length) {
+        setSeries([...series, newSeries])
+      }
       return ''
     } catch (error) {
       return error

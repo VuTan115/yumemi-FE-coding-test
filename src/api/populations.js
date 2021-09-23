@@ -1,4 +1,4 @@
-import endPoints from '../src/enums/endpoints'
+import endPoints from '../enums/endpoints'
 import instance from './axios'
 
 export const getPopulationCompitions = (prefCode) => {
