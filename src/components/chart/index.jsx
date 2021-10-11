@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react'
 import Chart from 'react-apexcharts'
 import instance from '../../api/axios'
 import endPoints from '../../enums/endpoints'
+import * as Messages from '../../enums/messages'
 import { getPopulationCompitions } from '../../api/populations'
 // 人口数 都道府県
 export default function MyChart() {
   const [loading, setLoading] = useState(true)
   const [prefectures, setPrefectures] = useState([])
   const [xaxisCategories, setXaxisCategories] = useState([])
-
-  /* chart config */
+  const [message, setMessage] = useState(Messages.NO_DATA)
+  /* chart configuration */
   const options = {
     chart: {
       toolbar: {
@@ -85,7 +86,14 @@ export default function MyChart() {
         }
       }
     },
-
+    noData: {
+      text: message,
+      align: 'center',
+      verticalAlign: 'middle',
+      style: {
+        fontSize: '1rem'
+      }
+    },
     responsive: [
       {
         breakpoint: 940,
@@ -157,11 +165,16 @@ export default function MyChart() {
     return { id: `${prefCode}`, name: prefName, data: dummyArr }
   }
   const getPopulation = async (prefCode) => {
-    const dummyVar = await getPopulationCompitions(prefCode)
-    if (dummyVar.status && dummyVar.data.result.data) {
-      return dummyVar.data.result.data[0].data
+    try {
+      const dummyVar = await getPopulationCompitions(prefCode)
+      if (dummyVar.status && dummyVar.data.result.data) {
+        return dummyVar.data.result.data[0].data
+      }
+      return []
+    } catch (error) {
+      setMessage(Messages.ERROR_MESSAGE)
+      return error
     }
-    return []
   }
 
   const updateXaxisLable = (data) => {
@@ -171,23 +184,34 @@ export default function MyChart() {
     })
     setXaxisCategories(years)
   }
+  /* get chart's data when first time visit or reload */
+  const firstVisit = async (firstPrefecture) => {
+    try {
+      const data = await getPopulation(firstPrefecture.prefCode)
+      updateXaxisLable(data)
+      const firstSeries = seriesConverter(
+        firstPrefecture.prefCode,
+        data,
+        firstPrefecture.prefName
+      )
+      setSeries([firstSeries])
+      return firstSeries
+    } catch (error) {
+      return error
+    }
+  }
   useEffect(async () => {
     try {
       const response = await instance.get(endPoints.PREFECTURES)
       if (response.status === 200) {
         const firstPrefecture = response.data.result[0]
-        const data = await getPopulation(firstPrefecture.prefCode)
-        updateXaxisLable(data)
-        const firstSeries = seriesConverter(
-          firstPrefecture.prefCode,
-          data,
-          firstPrefecture.prefName
-        )
-        setSeries([firstSeries])
+        await firstVisit(firstPrefecture)
         setPrefectures(response.data.result)
-        setLoading(false)
       }
+      setLoading(false)
     } catch (error) {
+      setMessage(Messages.ERROR_MESSAGE)
+      setLoading(false)
       return error
     }
   }, [])
@@ -198,17 +222,12 @@ export default function MyChart() {
   }
 
   const addSeries = async (prefCode, prefName) => {
-    try {
-      const data = await getPopulation(prefCode)
-      const newSeries = seriesConverter(prefCode, data, prefName)
-      setLoading(false)
-
-      if (data.length) {
-        setSeries([...series, newSeries])
-      }
-    } catch (error) {
-      return error
+    const data = await getPopulation(prefCode)
+    const newSeries = seriesConverter(prefCode, data, prefName)
+    if (data.length) {
+      setSeries([...series, newSeries])
     }
+    setLoading(false)
   }
   const checkboxChecked = (e) => {
     const prefCode = e.target.id
@@ -243,8 +262,11 @@ export default function MyChart() {
                   name="filter-items"
                   id={prefecture.prefCode}
                   value={prefecture.prefName}
-                  defaultChecked={prefecture.prefCode === 1}
+                  defaultChecked={
+                    prefecture.prefCode.toString() === series[0].id
+                  }
                 />
+
                 <span className="label">{prefecture.prefName}</span>
               </label>
             ))}
