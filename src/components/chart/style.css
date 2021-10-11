@@ -2,7 +2,7 @@
   --common-font: ' Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,Bitstream Vera Sans Mono, Courier New, monospace';
 }
 #chart {
-  margin: 3.5rem 2.25rem 2.25rem 1.25rem;
+  margin-top: 30px;
   height: 75vh;
 }
 .chart-title {
@@ -12,9 +12,8 @@
   padding: 0.5rem;
 }
 .filter {
-  height: 25vh;
+  max-height: 25vh;
   overflow: auto;
-  display: -moz-box;
   display: grid;
   gap: 0.5rem;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -43,9 +42,7 @@ input[type='checkbox' i] {
   border-radius: 0;
 }
 .xaxis-label {
-  color: red;
   padding: 10px;
-  background: red;
 }
 .axis-title,
 .data-label {
@@ -55,7 +52,7 @@ input[type='checkbox' i] {
   color: black;
 }
 .xaxis-title {
-  transform: translate(45%, -5%);
+  transform: translate(47%, -10%);
 }
 .yaxis-title {
   transform: translate(2%, -44%);
@@ -63,6 +60,7 @@ input[type='checkbox' i] {
 
 .label {
   white-space: nowrap;
+  font-size: 0.85rem;
   text-overflow: ellipsis;
 }
 .apexcharts-canvas .apexcharts-element-hidden {
@@ -93,9 +91,7 @@ input[type='checkbox' i] {
 }
 .dashed-loading {
   position: absolute;
-  height: 50px;
   top: 50%;
-  width: 50px;
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 0 auto;
@@ -113,7 +109,6 @@ input[type='checkbox' i] {
 }
 .dashed-loading:before {
   z-index: 5;
-  border: 3px dashed yellow;
   border-left: 3px solid transparent;
   border-bottom: 3px solid transparent;
   -webkit-animation: dashed 1s linear infinite;
@@ -130,11 +125,5 @@ input[type='checkbox' i] {
 @keyframes dashed {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@media screen and (max-width: 968px) {
-  .xaxis-title {
-    transform: translate(42%, -11%);
   }
 }

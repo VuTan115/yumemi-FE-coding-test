@@ -12,7 +12,6 @@ export default function MyChart() {
   /* chart config */
   const options = {
     chart: {
-      // redrawOnParentResize: true,
       toolbar: {
         show: true,
         offsetX: 0,
@@ -61,7 +60,7 @@ export default function MyChart() {
       position: 'right'
     },
     title: {
-      text: 'グラフは市町村別の人口推移を表します',
+      text: '市町村別の人口推移を表したグラフ',
       align: 'center',
       margin: 10,
       offsetX: 0,
@@ -86,42 +85,20 @@ export default function MyChart() {
         }
       }
     },
-    // dataLabels: {
-    //   enabled: true,
-    //   textAnchor: 'middle',
-    //   distributed: false,
-    //   offsetX: 0,
-    //   offsetY: 0,
-    //   style: {
-    //     cssClass: 'data-label'
-    //   },
-    //   background: {
-    //     enabled: true,
-    //     foreColor: '#fff',
-    //     padding: 4,
-    //     borderRadius: 2,
-    //     borderWidth: 1,
-    //     borderColor: '#fff',
-    //     opacity: 0.9,
-    //     dropShadow: {
-    //       enabled: false,
-    //       top: 1,
-    //       left: 1,
-    //       blur: 1,
-    //       color: '#000',
-    //       opacity: 0.45
-    //     }
-    //   },
-    //   dropShadow: {
-    //     enabled: false,
-    //     top: 1,
-    //     left: 1,
-    //     blur: 1,
-    //     color: '#000',
-    //     opacity: 0.45
-    //   }
-    // },
+
     responsive: [
+      {
+        breakpoint: 940,
+        options: {
+          xaxis: {
+            tickAmount: 10,
+            labels: {
+              show: true,
+              rotate: -45
+            }
+          }
+        }
+      },
       {
         breakpoint: 768,
         options: {
@@ -132,6 +109,20 @@ export default function MyChart() {
 
           title: {
             text: ''
+          },
+          xaxis: {
+            tickAmount: 8,
+            title: {
+              text: '年度',
+              style: {
+                cssClass: ''
+              }
+            }
+          },
+          yaxis: {
+            title: {
+              text: '人口数'
+            }
           }
         }
       },
@@ -144,12 +135,7 @@ export default function MyChart() {
             }
           },
           xaxis: {
-            title: {
-              text: '年度',
-              style: {
-                cssClass: ''
-              }
-            }
+            tickAmount: 5
           },
           yaxis: {
             title: {
@@ -188,7 +174,7 @@ export default function MyChart() {
   useEffect(async () => {
     try {
       const response = await instance.get(endPoints.PREFECTURES)
-      if (response.status < 400) {
+      if (response.status === 200) {
         const firstPrefecture = response.data.result[0]
         const data = await getPopulation(firstPrefecture.prefCode)
         updateXaxisLable(data)
