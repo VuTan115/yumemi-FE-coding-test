@@ -30,9 +30,9 @@
   GET /api/population/composition/perYear?prefCode=prefCode
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
+| Parameter  | Type     | Description                          |
+| :--------- | :------- | :----------------------------------- |
+| `prefCode` | `string` | **Required**. prefCode of prefecture |
 
 #### Get cities information
 
@@ -40,9 +40,10 @@
   GET /api/cities/?prefCode=prefCode
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
+| Parameter  | Type     | Description                          |
+| :--------- | :------- | :----------------------------------- |
+| `prefCode` | `string` | **Required**. prefCode of prefecture |
+
 
   
 ## Authors
