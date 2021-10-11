@@ -198,10 +198,9 @@ export default function MyChart() {
           firstPrefecture.prefName
         )
         setSeries([firstSeries])
+        setPrefectures(response.data.result)
         setLoading(false)
       }
-      setPrefectures(response.data.result)
-      return ''
     } catch (error) {
       return error
     }
@@ -216,12 +215,11 @@ export default function MyChart() {
     try {
       const data = await getPopulation(prefCode)
       const newSeries = seriesConverter(prefCode, data, prefName)
-      // setLoading(false)
+      setLoading(false)
 
       if (data.length) {
         setSeries([...series, newSeries])
       }
-      return ''
     } catch (error) {
       return error
     }
@@ -233,7 +231,7 @@ export default function MyChart() {
     if (!checkStatus) {
       removeSeries(prefCode)
     } else {
-      // setLoading(true)
+      setLoading(true)
       addSeries(prefCode, prefName)
     }
   }

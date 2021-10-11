@@ -1,10 +1,12 @@
+:root {
+  --common-font: ' Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,Bitstream Vera Sans Mono, Courier New, monospace';
+}
 #chart {
   margin: 3.5rem 2.25rem 2.25rem 1.25rem;
   height: 75vh;
 }
 .chart-title {
   font-size: 1.5rem;
-  color: rgb(255, 0, 0);
 }
 .prefectures-title {
   padding: 0.5rem;
@@ -12,30 +14,27 @@
 .filter {
   height: 25vh;
   overflow: auto;
-  margin: 0px auto;
-  width: 100%;
   display: -moz-box;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   border: 1px solid #bababa;
   padding: 0.2rem;
 }
 .filter-items {
   display: flex;
-  margin: 0.2vh 0.45vw;
   padding: 0.2rem 0.3rem 0.2rem 0.1rem;
-  width: calc(100% / 15);
-  min-width: 4.5rem;
+  width: 100%;
+  height: fit-content;
   cursor: pointer;
   justify-content: center;
   align-items: center;
   border: 1px solid rgb(177, 177, 177);
-  height: fit-content;
 }
 
 input[type='checkbox' i] {
   background-color: initial;
-  cursor: default;
+  cursor: pointer;
   appearance: auto;
   box-sizing: border-box;
   margin: 3px 3px 2px 2px;
@@ -48,9 +47,10 @@ input[type='checkbox' i] {
   padding: 10px;
   background: red;
 }
-.axis-title {
+.axis-title,
+.data-label {
   font-size: 14px;
-  font-family: 'font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,Bitstream Vera Sans Mono, Courier New, monospace';
+  font-family: var(--common-font);
   font-weight: 600;
   color: black;
 }
@@ -60,21 +60,10 @@ input[type='checkbox' i] {
 .yaxis-title {
   transform: translate(2%, -44%);
 }
-.data-label {
-  font-size: 14px;
-  font-family: 'font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,Bitstream Vera Sans Mono, Courier New, monospace';
-  font-weight: 500;
-  color: black;
-}
+
 .label {
-  min-width: 20px;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
-  display: inherit;
-  font-size: 1vw;
-  padding: 0;
-  margin: 0;
 }
 .apexcharts-canvas .apexcharts-element-hidden {
   display: none;
@@ -86,7 +75,7 @@ input[type='checkbox' i] {
   display: none;
 }
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -143,72 +132,9 @@ input[type='checkbox' i] {
     transform: rotate(360deg);
   }
 }
-@media screen and (max-width: 1025px) {
-  .filter-items {
-    min-width: 4.66rem;
-  }
-  .label {
-    font-size: 1.1vw;
-  }
-}
+
 @media screen and (max-width: 968px) {
   .xaxis-title {
     transform: translate(42%, -11%);
-  }
-  .label {
-    font-size: 1.2vw;
-    padding: 0;
-    margin: 0;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .label {
-    font-size: 1.5vw;
-
-    padding: 0;
-    margin: 0;
-  }
-}
-
-@media only screen and (max-width: 576px) {
-  #chart {
-    margin: 0;
-    height: 70vh;
-    margin-top: 3em;
-  }
-
-  input[type='radio' i] {
-    margin: 1px;
-  }
-}
-
-@media only screen and (max-width: 426px) {
-  .filter-items {
-    min-width: 4.8rem;
-  }
-  .label {
-    font-size: 0.6rem;
-    padding: 0;
-    margin: 0;
-  }
-}
-@media only screen and (max-width: 376px) {
-  .filter-items {
-    min-width: 4rem;
-  }
-  .label {
-    font-size: 0.6rem;
-    padding: 0;
-    margin: 0;
-  }
-}
-@media only screen and (max-width: 321px) {
-  .filter-items {
-    margin: 1vh 1.3vw 0.1vh;
-  }
-  .label {
-    font-size: 2.5vw;
-    padding: 0;
-    margin: 0;
   }
 }
