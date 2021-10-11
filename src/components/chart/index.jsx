@@ -172,6 +172,7 @@ export default function MyChart() {
       }
       return []
     } catch (error) {
+      setSeries([])
       setMessage(Messages.ERROR_MESSAGE)
       return error
     }
@@ -222,12 +223,16 @@ export default function MyChart() {
   }
 
   const addSeries = async (prefCode, prefName) => {
-    const data = await getPopulation(prefCode)
-    const newSeries = seriesConverter(prefCode, data, prefName)
-    if (data.length) {
-      setSeries([...series, newSeries])
+    try {
+      const data = await getPopulation(prefCode)
+      const newSeries = seriesConverter(prefCode, data, prefName)
+      if (data.length) {
+        setSeries([...series, newSeries])
+      }
+      setLoading(false)
+    } catch (error) {
+      return error
     }
-    setLoading(false)
   }
   const checkboxChecked = (e) => {
     const prefCode = e.target.id
@@ -263,7 +268,7 @@ export default function MyChart() {
                   id={prefecture.prefCode}
                   value={prefecture.prefName}
                   defaultChecked={
-                    prefecture.prefCode.toString() === series[0].id
+                    prefecture.prefCode.toString() === series[0]?.id
                   }
                 />
 
